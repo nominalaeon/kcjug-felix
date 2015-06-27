@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BIN_PATH=$(dirname $0)
+
+cd $BIN_PATH
+java -jar bin/felix.jar
+
