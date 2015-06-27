@@ -17,6 +17,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jackson.version>2.5.4</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -26,6 +27,21 @@
 			<version>4.0.3_1</version>
 			<scope>provided</scope>
 			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -37,9 +53,10 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>com.github.bstopp.kcjug.felix.*</Export-Package>
 						<Private-Package>*.impl.*</Private-Package>
+						<Export-Package>com.github.bstopp.kcjug.felix.*</Export-Package>
 						<Bundle-Activator>com.github.bstopp.kcjug.felix.Activator</Bundle-Activator>
+						<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin>
