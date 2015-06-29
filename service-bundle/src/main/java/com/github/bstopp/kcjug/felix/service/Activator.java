@@ -1,5 +1,5 @@
 
-package com.github.bstopp.kcjug.felix;
+package com.github.bstopp.kcjug.felix.service;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -12,6 +12,7 @@ import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.bstopp.kcjug.felix.twitter.service.TwitterService;
 import com.github.bstopp.kcjug.felix.twitter.service.impl.Twitter4jService;
 
@@ -45,6 +46,8 @@ public class Activator implements BundleActivator, ServiceListener {
             ServiceReference<?> ref = event.getServiceReference();
             TwitterService service = (TwitterService) bundleContext.getService(ref);
             ObjectMapper om = new ObjectMapper();
+            om.configure(SerializationFeature.INDENT_OUTPUT, true);
+
             // Write to buffer, OM closes the output.
             StringWriter out = new StringWriter();
             try {

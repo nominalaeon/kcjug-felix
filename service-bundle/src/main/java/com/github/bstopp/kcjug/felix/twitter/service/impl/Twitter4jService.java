@@ -40,6 +40,8 @@ public class Twitter4jService implements TwitterService {
             account.setUserId(user.getId());
             account.setProfileUrl(TwitterService.TWITTER_URL + user.getScreenName());
             account.setProfileImage(user.getBiggerProfileImageURLHttps());
+            account.setFollowers(user.getFollowersCount());
+            account.setFriends(user.getFriendsCount());
 
             return account;
         } catch (TwitterException ex) {

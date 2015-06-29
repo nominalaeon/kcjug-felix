@@ -1,3 +1,6 @@
 
-install file:../lib/twitter-service-bundle.jar
 install file:../lib/org.apache.servicemix.bundles.twitter4j-4.0.3_1.jar
+install file:../lib/jackson-core-2.5.4.jar
+install file:../lib/jackson-annotations-2.5.4.jar
+install file:../lib/jackson-databind-2.5.4.jar
+install file:../lib/twitter-service-bundle.jar
