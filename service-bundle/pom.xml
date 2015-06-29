@@ -28,9 +28,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>com.github.bstopp.kcjug.felix.*</Export-Package>
-                        <Private-Package>*.impl.*</Private-Package>
-                        <Bundle-Activator>com.github.bstopp.kcjug.felix.Activator</Bundle-Activator>
+                        <Bundle-Activator>com.github.bstopp.kcjug.felix.service.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

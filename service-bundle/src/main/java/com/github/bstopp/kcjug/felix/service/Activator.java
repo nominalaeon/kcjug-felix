@@ -1,5 +1,5 @@
 
-package com.github.bstopp.kcjug.felix;
+package com.github.bstopp.kcjug.felix.service;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
