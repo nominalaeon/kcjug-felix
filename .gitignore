@@ -2,3 +2,15 @@
 */felix-cache
 */target
 lib/twitter-*-bundle.jar
+felix/bundle/commons*
+felix/bundle/jackson*
+felix/bundle/org.apache.felix.config*
+felix/bundle/org.apache.felix.dep*
+felix/bundle/org.apache.felix.event*
+felix/bundle/org.apache.felix.http*
+felix/bundle/org.apache.felix.meta*
+felix/bundle/org.apache.felix.scr*
+felix/bundle/org.apache.felix.web*
+felix/bundle/org.apache.servicemix*
+felix/bundle/org.apache.sling*
+

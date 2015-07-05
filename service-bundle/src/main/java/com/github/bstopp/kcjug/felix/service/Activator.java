@@ -2,8 +2,6 @@
 package com.github.bstopp.kcjug.felix.service;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Hashtable;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -11,10 +9,10 @@ import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
 
+import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.bstopp.kcjug.felix.twitter.service.TwitterService;
-import com.github.bstopp.kcjug.felix.twitter.service.impl.Twitter4jService;
 
 public class Activator implements BundleActivator, ServiceListener {
 
@@ -24,13 +22,7 @@ public class Activator implements BundleActivator, ServiceListener {
     public void start(BundleContext context) throws Exception {
         System.out.println("Starting Twitter Service Bundle.");
         bundleContext = context;
-        synchronized (this) {
-
-            bundleContext.addServiceListener(this);
-
-            Hashtable<String, String> props = new Hashtable<String, String>();
-            context.registerService(TwitterService.class.getName(), new Twitter4jService(), props);
-        }
+        bundleContext.addServiceListener(this);
 
     }
 
@@ -42,21 +34,25 @@ public class Activator implements BundleActivator, ServiceListener {
     @Override
     public void serviceChanged(ServiceEvent event) {
 
-        if (event.getType() == ServiceEvent.REGISTERED) {
-            ServiceReference<?> ref = event.getServiceReference();
-            TwitterService service = (TwitterService) bundleContext.getService(ref);
-            ObjectMapper om = new ObjectMapper();
-            om.configure(SerializationFeature.INDENT_OUTPUT, true);
+        System.out.println("Event occured, type: " + event.getType());
 
-            // Write to buffer, OM closes the output.
-            StringWriter out = new StringWriter();
-            try {
-                om.writeValue(out, service.getAccount());
-            } catch (IOException e) {
-                System.out.println("Error on converting to JSON.");
-                e.printStackTrace();
+        if (event.getType() == ServiceEvent.REGISTERED) {
+
+            ServiceReference<?> ref = event.getServiceReference();
+            System.out.println("Got Twitter Service Reference.");
+            TwitterService service = (TwitterService) bundleContext.getService(ref);
+
+            if (service != null) {
+                System.out.println("Got Twitter Service.");
+                ObjectMapper om = new ObjectMapper();
+                om.configure(SerializationFeature.INDENT_OUTPUT, true);
+                om.configure(Feature.AUTO_CLOSE_TARGET, false);
+                try {
+                    om.writeValue(System.out, service.getAccount());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            System.out.println(out);
         }
 
     }
