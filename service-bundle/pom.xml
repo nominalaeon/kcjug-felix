@@ -1,25 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.github.bstopp.kcjug.felix</groupId>
         <artifactId>kcjug-felix</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>twitter-service-bundle</artifactId>
     <packaging>bundle</packaging>
-
     <name>Twitter Service Bundle</name>
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.5.4</jackson.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
@@ -46,8 +39,14 @@
             <version>${jackson.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.bstopp.kcjug.felix</groupId>
+            <artifactId>twitter-model</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+            <type>bundle</type>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -56,7 +55,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>com.github.bstopp.kcjug.felix.twitter.*</Export-Package>
+                        <Export-Package>
+                            !com.github.bstopp.kcjug.felix.twitter.*.impl.*,
+                            com.github.bstopp.kcjug.felix.twitter.job,
+                            com.github.bstopp.kcjug.felix.twitter.service
+                        </Export-Package>
                         <Bundle-Activator>com.github.bstopp.kcjug.felix.service.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
