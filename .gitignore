@@ -13,4 +13,4 @@ felix/bundle/org.apache.felix.scr*
 felix/bundle/org.apache.felix.web*
 felix/bundle/org.apache.servicemix*
 felix/bundle/org.apache.sling*
-
+felix/*.json
